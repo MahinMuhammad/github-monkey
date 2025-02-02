@@ -35,6 +35,13 @@ body {
   border-radius: 1em;
 }
 
+.nav-bar{
+  background-color: light-dark( #F7F9FC, #343131);
+  padding: 1em;
+  margin-bottom: 1em;
+  border-radius: 1em;
+}
+
 /* width */
 ::-webkit-scrollbar {
   width: 0.15em;

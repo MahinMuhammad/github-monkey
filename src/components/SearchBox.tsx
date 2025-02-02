@@ -5,12 +5,11 @@ const SearchBox = ({ setUsername, fetchData }: { setUsername: Function; fetchDat
 
     const handleInputChange = (e: any) => {
         setInput(e.target.value)
+        setUsername(e.target.value);
     }
 
     const handleSearch = () => {
-        if (!input.trim()) return;
-        setUsername(input);
-        fetchData(); // Fetch users after updating username
+        fetchData();
     };
 
     return (

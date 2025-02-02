@@ -1,19 +1,31 @@
-// github.ts
 import { GitHubUser } from "../models/GithubUser";
 
 export const fetchGitHubUserData = async (username: string, type: "followers" | "following"): Promise<GitHubUser[]> => {
   if (!username) return [];
 
-  const endpoint = `https://api.github.com/users/${username}/${type}`;
+  let allData: GitHubUser[] = [];
+  let page = 1;
+  const perPage = 100; // Maximum per page allowed by GitHub API
 
   try {
-    const response = await fetch(endpoint);
-    if (!response.ok) {
-      throw new Error(`GitHub API error: ${response.status}`);
+    while (true) {
+      const response = await fetch(`https://api.github.com/users/${username}/${type}?page=${page}&per_page=${perPage}`);
+      
+      if (!response.ok) {
+        throw new Error(`GitHub API error: ${response.status}`);
+      }
+
+      const data: GitHubUser[] = await response.json();
+
+      if (!Array.isArray(data) || data.length === 0) {
+        break; // No more data, exit loop
+      }
+
+      allData = [...allData, ...data];
+      page++;
     }
 
-    const data: GitHubUser[] = await response.json();
-    return Array.isArray(data) ? data : [];
+    return allData;
   } catch (error) {
     console.error("Error fetching GitHub data:", error);
     return [];
