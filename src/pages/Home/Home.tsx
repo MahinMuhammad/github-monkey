@@ -8,32 +8,46 @@ import CustomNavbar from "../../components/CustomNavbar";
 
 function Home() {
     const [username, setUsername] = useState("");
-    const [followersData, setFollowersData] = useState<GitHubUser[]>([]);
-    const [followingData, setFollowingData] = useState<GitHubUser[]>([]);
+    const [followersList, setFollowersList] = useState<GitHubUser[]>([]);
+    const [followingList, setFollowingList] = useState<GitHubUser[]>([]);
     const [currentList, setCurrentList] = useState<GitHubUser[]>([]);
     const [tab, setTab] = useState(0);
-    const [haveSearched, setHaveSearched] = useState(false)
+    const [showResult, setShowResult] = useState(false)
     const [isLoading, setLoading] = useState(false)
 
     const handleFetchData = async () => {
-        if (!username.trim()) return;
-        setHaveSearched(true);
-        setLoading(true)
-        const followers = await fetchGitHubUserData(username, "followers");
-        const following = await fetchGitHubUserData(username, "following");
+        if (!username.trim()) {
+            alert("Please enter a GitHub username.");
+            return;
+        }
     
-        setFollowersData(followers);
-        setFollowingData(following);
+        setShowResult(true);
+        setLoading(true);
     
-        if (tab === 0) setCurrentList(followers);
-        else if (tab === 1) setCurrentList(following);
-        else setCurrentList(getWhoDoesntFollowBack());
-        setLoading(false)
-    };    
+        try {
+            const followers = await fetchGitHubUserData(username, "followers");
+            const following = await fetchGitHubUserData(username, "following");
+    
+            setFollowersList(followers);
+            setFollowingList(following);
+    
+            if (tab === 0) setCurrentList(followers);
+            else if (tab === 1) setCurrentList(following);
+            else setCurrentList(getWhoDoesntFollowBack());
+        } catch (error: any) {
+            console.log(error)
+            alert(error.message); // Shows the exact error message
+            setShowResult(false);
+        } finally {
+            setTimeout(() => {
+                setLoading(false);
+            }, 2000);
+        }
+    };      
 
     const getWhoDoesntFollowBack = () => {
         return [
-            ...followingData.filter(f => !followersData.some(follower => follower.id === f.id))
+            ...followingList.filter(f => !followersList.some(follower => follower.id === f.id))
         ];
     };
 
@@ -42,16 +56,16 @@ function Home() {
 
         switch (selectedTab) {
             case 0:
-                setCurrentList(followersData);
+                setCurrentList(followersList);
                 break;
             case 1:
-                setCurrentList(followingData);
+                setCurrentList(followingList);
                 break;
             case 2:
                 setCurrentList(getWhoDoesntFollowBack());
                 break;
             default:
-                setCurrentList(followersData);
+                setCurrentList(followersList);
                 break;
         }
     };
@@ -64,7 +78,7 @@ function Home() {
                 <SearchBox setUsername={setUsername} fetchData={handleFetchData} />
 
                 {/* Result */}
-                <div className={`relative mt-5 ${haveSearched === false ? "hidden" : ""}`}>
+                <div className={`relative mt-5 ${showResult === false ? "hidden" : ""}`}>
                     {/* List Tab */}
                     <ListTab setTab={handleTabSwitch} />
 

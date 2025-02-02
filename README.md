@@ -4,8 +4,7 @@ A simple **React.js + Vite** app that allows users to search for a GitHub user a
 
 ## 💻 Live Demo
 
-**Live URL:** [https://your-live-app-url.com](https://your-live-app-url.com)  
-*(Replace with your actual deployed link)*
+**Live URL:** [https://github-monkey.vercel.app](https://github-monkey.vercel.app)
 
 ## 🚀 Features
 
