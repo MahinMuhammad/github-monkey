@@ -1,50 +1,58 @@
-# React + TypeScript + Vite
+# GitHub Monkey
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A simple **React.js + Vite** app that allows users to search for a GitHub user and view their followers and following lists. Users can also catch😉 who they follow but doesn't follow them back.
 
-Currently, two official plugins are available:
+## 💻 Live Demo
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+**Live URL:** [https://your-live-app-url.com](https://your-live-app-url.com)  
+*(Replace with your actual deployed link)*
 
-## Expanding the ESLint configuration
+## 🚀 Features
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- 🔍 Search for any GitHub user by username
+- 📌 View **followers**, **followings** and **who doesn't follow back😉**
+- 🔄 Check users who **don’t follow back**
+- ⚡ Built with **React.js + Vite** for fast performance
+- 🎨 Styled with **Tailwind CSS**
+- 🌍 Fetches real-time data from **GitHub API**
 
-- Configure the top-level `parserOptions` property like this:
+## 🛠️ Tech Stack
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+- **Frontend:** React.js + Vite
+- **State Management:** React Hooks (`useState`)
+- **Styling:** Tailwind CSS
+- **API Integration:** GitHub REST API (`fetch`)
+
+## 📦 Installation & Setup
+
+### 1️⃣ Clone the Repository  
+```sh
+git clone https://github.com/MahinMuhammad/github-monkey.git
+cd github-monkey
+```
+### 2️⃣ Install Dependencies
+```sh
+npm install
+```
+### 3️⃣ Run the Development Server
+```sh
+npm run dev
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+### ⚠️ GitHub API Rate Limits
+The GitHub API has rate limits, so if you make too many requests in a short time, you may receive an error. Consider using GitHub Authentication for higher request limits.
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+### 🤝 Contributing
+Contributions are welcome! If you find any issues or have suggestions, feel free to open an issue or a pull request.
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+### 📜 License
+This project is licensed under the MIT License.
+
+Made with ❤️ by [Md Mahinur Rahman](http://mahinmuhammad.github.io)
+
+
+
+
+
+
+
