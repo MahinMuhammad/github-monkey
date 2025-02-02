@@ -22,7 +22,7 @@ const SearchBox = ({ setUsername, fetchData }: { setUsername: Function; fetchDat
                     value={input}
                     onChange={handleInputChange} />
 
-                <button className="btn btn-outline btn-primary" onClick={handleSearch}>Search</button>
+                <button className="btn btn-outline btn-primary" disabled={!input} onClick={handleSearch}>Search</button>
             </div>
         </>
     )

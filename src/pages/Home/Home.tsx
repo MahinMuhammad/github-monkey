@@ -16,7 +16,6 @@ function Home() {
     const [isLoading, setLoading] = useState(false)
 
     const handleFetchData = async () => {
-        alert(username)
         if (!username.trim()) return;
         setHaveSearched(true);
         setLoading(true)
